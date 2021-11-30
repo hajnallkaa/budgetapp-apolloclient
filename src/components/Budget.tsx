@@ -7,6 +7,7 @@ import List from './List';
 import ExpenseDetails from './ExpenseDetails';
 import IncomeDetails from './IncomeDetails';
 
+
 const { Content, Footer } = Layout;
 
 const mystyle = {
@@ -21,7 +22,7 @@ const Budget: React.FC = () => {
         <Content style={{ padding: '0 50px', marginTop: '20px'}}>
           <div className="site-layout-content">
 
-          
+         
               <Divider orientation="left">Your Budget</Divider>
                   <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} >
                     <Col xs={24} sm={24} md={24} lg={8} className="gutter-row" span={8}>
@@ -42,7 +43,7 @@ const Budget: React.FC = () => {
                   <Col span={24}><List/></Col>
                   </Row>
 
-         
+                  
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>

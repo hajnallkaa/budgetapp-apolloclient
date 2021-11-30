@@ -1,9 +1,11 @@
 import React from 'react';
 import { Pie } from '@ant-design/charts';
 import {useQuery} from "@apollo/client";
-import {GET_EXPENSES} from '../Graphql/Queries'
+import {GET_EXPENSES} from '../Graphql/Queries';
+
 
 const ExpenseChart: React.FC = () => {
+  
   const{data} = useQuery(GET_EXPENSES)
   const [expenses, setExpenses] = React.useState<IChart[]>([
     {
@@ -15,10 +17,9 @@ const ExpenseChart: React.FC = () => {
   React.useEffect(() => {
         if (data){
         setExpenses(data.getTransactionsByCategory)
-        }
+        } 
     } , [data])
 
-  
   let config = {
     appendPadding: 10,
     data: expenses,

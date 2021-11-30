@@ -11,7 +11,7 @@ const {  Content } = Layout;
 
 const ExpenseStatistics: React.FC = () => {
   const{data} = useQuery(GET_EXPENSE_STAT)
-  const [stat, setStat] = React.useState<IDateStat[]>([
+  const [statistic, setStatistic] = React.useState<IDateStat[]>([
     {
       x: 0,
       y: 0
@@ -21,7 +21,7 @@ const ExpenseStatistics: React.FC = () => {
 
   React.useEffect(() => {
     if (data){
-    setStat(data.getDaysofExpense)
+    setStatistic(data.getDaysofExpense)
     }
 }, [data])
 
@@ -33,7 +33,7 @@ const ExpenseStatistics: React.FC = () => {
           <div className="site-layout-content">
           <>
             <Column
-              data={stat}
+              data={statistic}
               height={500}
               xField="x"
               yField="y"

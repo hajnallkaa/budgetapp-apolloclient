@@ -18,7 +18,6 @@ interface IChart {
   type ContextType = {
     transactions: ITransactions[]
     saveTransaction: (transaction: ITransactions) => void
-    updateTransaction: (transaction: ITransactions) => void
     deleteTransaction: (id: number) => void
   } 
 

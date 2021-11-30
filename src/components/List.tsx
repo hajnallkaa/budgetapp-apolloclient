@@ -46,7 +46,7 @@ const List: React.FC = () => {
                     description={transaction.date + ' - ' + transaction.value +'$'}
                     />
                     <DeleteOutlined  style={{marginRight: '10px'}} onClick={() => {
-                  deleteTransaction({ variables: { id: transaction.id } });
+                  deleteTransaction({ variables: { id: transaction.id }, refetchQueries: [{query: GET_TRANSACTIONS}] });
                 }}/>
                 </MyList.Item>
             

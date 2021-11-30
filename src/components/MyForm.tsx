@@ -1,30 +1,28 @@
 import React from 'react'
 import { useState } from 'react';
-import {Form} from 'antd';
+
 import {Card, Typography, Divider} from 'antd';
 import './style.css';
 import 'antd/dist/antd.css';
 import {useQuery} from "@apollo/client";
-import {GET_MONEY} from '../Graphql/Queries'
+import {GET_EXPENSES, GET_INCOMES, GET_MONEY, GET_TRANSACTIONS, GET_EXPENSE_STAT} from '../Graphql/Queries'
 import {useMutation} from '@apollo/client'
 import { CREATE_TRANSACTION_MUTATION } from "../Graphql/Mutations";
 
 
 
-type SizeType = Parameters<typeof Form>[0]['size'];
-
-
 
 const MyForm: React.FC = () => {
+  
     const{data} = useQuery(GET_MONEY)
-    const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
     const [budget, setBudget] = React.useState(0);
     const [formState, setFormState] = useState({
-      category: '',
-      type: '',
+      category: 'Income',
+      type: 'Salary',
       value:0,
       date:''
     });
+   
 
     React.useEffect(() => {
       if (data){
@@ -32,10 +30,9 @@ const MyForm: React.FC = () => {
       }
   }, [data])
 
-    const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-    setComponentSize(size);
-  };
 
+
+  
   
   const [createTransaction] = useMutation(CREATE_TRANSACTION_MUTATION, {
     variables: {
@@ -43,8 +40,12 @@ const MyForm: React.FC = () => {
         type: formState.type,
         value: formState.value,
         date: formState.date,
-      }
+      }, refetchQueries: [{query: GET_TRANSACTIONS}, {query: GET_EXPENSES},{query: GET_INCOMES},{query: GET_MONEY}, {query: GET_EXPENSE_STAT} ]
 });
+
+  
+
+
   
  
     return (
@@ -63,6 +64,7 @@ const MyForm: React.FC = () => {
         <form className='Form' onSubmit={(e) => {
             e.preventDefault();
             createTransaction();
+            
           }} style={{padding:'10px'}}>
         <div>
           <div>
@@ -116,7 +118,7 @@ const MyForm: React.FC = () => {
               } type='date' id='date' />
           </div>
         </div>
-        <button type="submit">Add</button>
+        <button type="submit" className='button'>Add</button>
       </form> 
 
       </Card>

@@ -11,4 +11,8 @@
 .button {
   background-color: #5E8B7E;
   color: white;
+  padding: 10px 50px;
+  border-style: none;
+  position: relative;
+  margin: 0 35%;
 }
